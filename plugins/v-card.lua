@@ -14,7 +14,7 @@ local function run(msg, matches)
 🔖Phone number: +98939830**** 
 ⭐️ Team name: kiavaprotection
 📊 Level: 2
-📝Status: Editor & thinker
+📝Status: Editor & Developer
 
         ]]
  send_document(get_receiver(msg), "/root/antspmbot/data/sticker/Mohammad.webp", ok_cb, false)
