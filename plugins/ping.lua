@@ -14,7 +14,7 @@ I am online ͡° ͜ʖ ͡°
     return text
 
 
-    else  if not is_sudo(msg) then
+    else   if matches[1] not is_sudo(msg) then
           return "🔖شما جزء تیم کیاوا نیستید یا کارت شناسایی برای شما صادر نشده است"
 
 
