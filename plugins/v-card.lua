@@ -17,7 +17,7 @@ local function run(msg, matches)
 📝Status: Editor & Developer
 
         ]]
- send_document(get_receiver(msg), "/root/antspmbot/data/sticker/Mohammad.webp", ok_cb, false)
+ send_document(get_receiver(msg), "/root/parniangh123/data/sticker/147237496.webp", ok_cb, false)
 
     return text
 
