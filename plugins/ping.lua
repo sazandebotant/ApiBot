@@ -1,7 +1,7 @@
 do
 --Coded By @kiava
 local function run(msg, matches)
-    local kiava = 174997972,147237496
+    local SUDO = 174997972,147237496
     if matches[1] == 'ping' and is_owner(msg) then
         local text = [[
 
