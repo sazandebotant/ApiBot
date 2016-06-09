@@ -5,6 +5,7 @@ local function pre_process(msg)
     --Checking mute
     local hash = 'mate:'..msg.to.id
     if redis:get(hash) and msg.fwd_from and not is_sudo(msg) and not is_owner(msg) and not is_momod(msg) and not is_admin1(msg)  then
+            send_large_msg(chat, "👤کاربر : [ @" .. msg.from.username .. "] \n💠شناسه کاربر : [" .. msg.from.id .."] \n ❌در حال فرستادن فروارد است\n 🚷پیام پاک شد" )
             delete_msg(msg.id, ok_cb, true)
             return "done"
         end
