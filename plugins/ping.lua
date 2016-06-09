@@ -5,8 +5,9 @@ local function run(msg, matches)
     if matches[1] == 'ping' and is_owner(msg) then
         local text = [[
 
-test
-
+I am online ͡° ͜ʖ ͡°
+\n
+@kiavaprotection
         ]]
  send_document(get_receiver(msg), "/root/antspmbot/data/sticker/Mohammad.webp", ok_cb, false)
 
