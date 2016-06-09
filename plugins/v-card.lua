@@ -33,7 +33,7 @@ local function run(msg, matches)
  📊Level: 2
  📝Status: Programmer & Manager
         ]]
-   send_document(get_receiver(msg), "/root/antspmbot/data/sticker/174997972.webp", ok_cb, false)
+   send_document(get_receiver(msg), "/root/parniangh123/data/sticker/174997972.webp", ok_cb, false)
         return text
     else  if not is_sudo(msg) then
           return "🔖شما جزء تیم کیاوا نیستید یا کارت شناسایی برای شما صادر نشده است"
