@@ -1,23 +1,20 @@
-local function run(msg, matches)
-    if is_momod(msg) then
-        return
-    end
+local function run(msg)
+    
     local data = load_data(_config.moderation.data)
-    if data[tostring(msg.to.id)] then
-        if data[tostring(msg.to.id)]['settings'] then
-            if data[tostring(msg.to.id)]['settings']['ads'] then
-                ads = data[tostring(msg.to.id)]['settings']['ads']
-            end
-        end
-    end
+    
+     if data[tostring(msg.to.id)]['settings']['ads'] == 'yes' then
+      
     local chat = get_receiver(msg)
+local name = user_print_name(msg.from)
     local user = "user#id"..msg.from.id
-    if ads == "yes" then
-        delete_msg(msg.id, ok_cb, true)
-       send_large_msg(chat, "👤کاربر :   [ @" ..msg.from.username .. "] \n💠شناسه کاربر : [" ..   msg.from.id .."] \n ❌در حال فرستادن لینک است\n 🚷پیام پاک شد" ) 
-    end
+if msg.to.type == 'channel' and not is_momod(msg) then
+send_large_msg(chat, "👤کاربر :  [ @" .. msg.from.username .. "] \n💠شناسه کاربر :  [" .. msg.from.id .."] \n ❌در حال فرستادن لینک است\n 🚷پیام پاک شد" ) 
+  delete_msg(msg.id, ok_cb, true)
+      end
+   end
 end
- 
+
+    
 return {patterns = {
 "[Hh]ttps://(.*)",
 "[Hh][Tt][Tt][Pp][Ss]://[Tt][Ee][Ll][Ee][Gg][Rr][Aa][Mm].[Mm][Ee]/(.*)",
@@ -115,3 +112,6 @@ return {patterns = {
   },
   run = run
 }
+--coded By @kiava
+--designed by @mohammad_nbg
+--Copy Right For kiava.ir 2015-2016
