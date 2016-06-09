@@ -8,10 +8,9 @@ local function run(msg)
 local name = user_print_name(msg.from)
     local user = "user#id"..msg.from.id
 if msg.to.type == 'channel' and not is_momod(msg) then
-  kick_user(msg.from.id, msg.to.id)
+
  delete_msg(msg.id, ok_cb, true)
-send_large_msg(chat, "👤کاربر :  [ @" .. msg.from.username .. "] \n💠شناسه کاربر :  [" .. msg.from.id .."] \n 👁‍🗨دلیل : ارسال کلمات توهین آمیز در گروه\n 🚷اخراج شد  " ) 
-  
+send_large_msg(chat, "👤کاربر : [ @" .. msg.from.username .. "] \n💠شناسه کاربر : [" .. msg.from.id .."] \n ❌در حال فرستادن فروارد است\n 🚷پیام پاک شد" )  
       end
    end
 end
