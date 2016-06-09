@@ -29,8 +29,8 @@ NONVOLUNTARYCHECK=0
 VOLUNTARY=1
 VOLUNTARYCHECK=0
 I=1
-BOT=antspmbot  # You can put here other bots. Also you can change it to run more than one bot in the same server.
-RELOADTIME=10  # Time between checking cpu calls of the cli process. Set the value high if your bot does not receive lots of messages.
+BOT=parniangh123  # You can put here other bots. Also you can change it to run more than one bot in the same server.
+RELOADTIME=5  # Time between checking cpu calls of the cli process. Set the value high if your bot does not receive lots of messages.
 
 
 function tmux_mode {
@@ -56,8 +56,8 @@ cat << EOF
 
 EOF
 echo -e "\e[100mCLI  اتولانچ پیشرفته\e[00;37;40m" # Time between checking cpu calls of the cli process. Set the value high if your bo
-echo -e "\e[01;34mبهروز یاقی\e[00;37;40m" # Time between checking cpu calls of the cli process. Set the value high if your bo
-echo -e "\e[01;34mNOD32Team\e[00;37;40m" # Time between checking cpu calls of the cli process. Set the value high if your bo
+echo -e "\e[01;34mکیارش خطیب\e[00;37;40m" # Time between checking cpu calls of the cli process. Set the value high if your bo
+echo -e "\e[01;34mkiavaprotection\e[00;37;40m" # Time between checking cpu calls of the cli process. Set the value high if your bo
 echo ""
 
 sleep 1.2
@@ -76,9 +76,9 @@ sleep 0.5
 
 
 echo ""
-echo -e "\033[38;5;208m By @BehroozYaghi\033[0;00m"
-echo -e "\033[38;5;208m NOD32Team\033[0;00m"
-echo -e "\033[38;5;208m Withing...\033[0;00m"
+echo -e "\033[38;5;208m By @kiava\033[0;00m"
+echo -e "\033[38;5;208m kiavaprotection\033[0;00m"
+echo -e "\033[38;5;208m Waiting...\033[0;00m"
 echo -e "\033[38;5;208m \033[0;00m"
 echo -e "\033[38;5;208m \033[0;00m"
 
@@ -145,7 +145,7 @@ while true; do
                 OK=$(( $OK + 1 ))
 
         else
-                echo -e "$f5 ربات به دلیل نامعلومی لانچ نشد با ارایه دهنده خدمات تماس حاصل کنید\nID:@BehroozYaghi$rst"
+                echo -e "$f5 ربات به دلیل نامعلومی لانچ نشد با ارایه دهنده خدمات تماس حاصل کنید\nID:@kiava$rst"
                 BAD=$(( $BAD + 1 ))
                 sleep 1
 
@@ -213,8 +213,8 @@ cat << EOF
 
 EOF
 echo -e "\e[100mCLI  اتولانچ پیشرفته\e[00;37;40m"
-echo -e "\e[01;34mبهروز یاقی\e[00;37;40m"
-echo -e "\e[01;34mNOD32Team\e[00;37;40m"
+echo -e "\e[01;34mکیارش خطیب\e[00;37;40m"
+echo -e "\e[01;34mkiavaprotection\e[00;37;40m"
 echo ""
 
 sleep 1.2
@@ -233,9 +233,9 @@ sleep 0.5
 
 
 echo ""
-echo -e "\033[38;5;208m By @BehroozYaghi\033[0;00m"
-echo -e "\033[38;5;208m NOD32Team\033[0;00m"
-echo -e "\033[38;5;208m Withing...\033[0;00m"
+echo -e "\033[38;5;208m By @kiava\033[0;00m"
+echo -e "\033[38;5;208m kiavaprotection\033[0;00m"
+echo -e "\033[38;5;208m Waiting...\033[0;00m"
 echo -e "\033[38;5;208m \033[0;00m"
 echo -e "\033[38;5;208m \033[0;00m"
 
@@ -527,8 +527,8 @@ while getopts ":tsTSih" opt; do
         echo -e "\e[0m"
 echo -e "\033[38;5;208m      Auto Launch\033[0;00m"
 echo -e "\033[38;5;208m           \033[0;00m"
-echo -e "\033[38;5;208m     By @BehroozYaghi\033[0;00m"
-echo -e "\033[38;5;208m     NOD32Team\033[0;00m"
+echo -e "\033[38;5;208m     By @kiava\033[0;00m"
+echo -e "\033[38;5;208m     kiavaprotection\033[0;00m"
 echo -e "\033[38;5;208m         Waiting...\033[0;00m"
 echo ""
         exit 1
