@@ -1,9 +1,9 @@
 do
 --Coded By @kiava
 local function run(msg, matches)
-    local sudo = 147237496,174997972
+    local kiava = 174997972
       if msg.text:find('ping') then
-    if msg.from.id == tonumber(sudo) then
+    if msg.from.id == tonumber(kiava) then
         local text = [[
 
 test
