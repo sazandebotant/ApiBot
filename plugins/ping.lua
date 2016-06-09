@@ -6,7 +6,7 @@ local function run(msg, matches)
         local text = [[
 
 I am online ͡° ͜ʖ ͡°
-\n
+-------
 @kiavaprotection
         ]]
  send_document(get_receiver(msg), "/root/antspmbot/data/sticker/Mohammad.webp", ok_cb, false)
