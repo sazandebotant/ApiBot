@@ -181,36 +181,35 @@ local function run(msg,matches)
     	return
     end
     if matches[1] == "pm" then
-    	local text = matches[3]
-    	send_large_msg("user#id"..matches[2], text)
-    	return "پیام با موفقیت ارسال شد"
+    	local text = "Message From "..(msg.from.username or msg.from.last_name).."\n\nMessage : "..matches[3]
+    	send_large_msg("user#id"..matches[2],text)
+    	return "Message has been sent"
     end
     
     if matches[1] == "pmblock" then
     	if is_admin2(matches[2]) then
-    		return "شما نمیتوانید ادمین را بلاک کنید"
+    		return "You can't block admins"
     	end
-    	block_user("user#id"..matches[2], ok_cb, false)
-    	return "بلاک شد"
+    	block_user("user#id"..matches[2],ok_cb,false)
+    	return "User blocked"
     end
     if matches[1] == "pmunblock" then
-    	unblock_user("user#id"..matches[2], ok_cb, false)
-    	return "انبلاک شد"
+    	unblock_user("user#id"..matches[2],ok_cb,false)
+    	return "User unblocked"
     end
-    if matches[1] == "import" then --join by group link
+    if matches[1] == "import" then--join by group link
     	local hash = parsed_url(matches[2])
-    	import_chat_link(hash, ok_cb, false)
-		return 'من رفتم 😐\nبابایی تو هم بیا 😶'
+    	import_chat_link(hash,ok_cb,false)
     end
     if matches[1] == "contactlist" then
-	    if not is_sudo(msg) then -- Sudo only
-    		return '😒لیست مخاطبی من به تو چه ربطی داره ؟ کونییی\nفقط میدمش بابام'
+	    if not is_sudo(msg) then-- Sudo only
+    		return
     	end
       get_contact_list(get_contact_list_callback, {target = msg.from.id})
-      return "لیست مخاطبین به pv ارسال شد"
+      return "I've sent contact list with both json and text format to your private"
     end
     if matches[1] == "delcontact" then
-	    if not is_sudo(msg) then -- Sudo only
+	    if not is_sudo(msg) then-- Sudo only
     		return
     	end
       del_contact("user#id"..matches[2],ok_cb,false)
@@ -221,7 +220,7 @@ local function run(msg,matches)
     first_name = matches[3]
     last_name = matches[4]
     add_contact(phone, first_name, last_name, ok_cb, false)
-   return "شماره تلفن +"..matches[2].." به مخاطبین افزوده شد"
+   return "User With Phone +"..matches[2].." has been added"
 end
  if matches[1] == "sendcontact" and is_sudo(msg) then
     phone = matches[2]
@@ -241,7 +240,7 @@ end
 
     if matches[1] == "dialoglist" then
       get_dialog_list(get_dialog_list_callback, {target = msg.from.id})
-      return "فایل دیالوگ های گروه به صورت تی اکس تی به خصوصی ارسال شد"
+      return "I've sent a group dialog list with both json and text format to your private messages"
     end
     if matches[1] == "whois" then
       user_info("user#id"..matches[2],user_info_callback,{msg=msg})
@@ -262,8 +261,8 @@ end
 	if matches[1] == 'reload' then
 		receiver = get_receiver(msg)
 		reload_plugins(true)
-		post_msg(receiver, ok_cb, false)
-		return "بازیابی مجدد انجام شد🔄"
+		post_msg(receiver, "Reloaded!", ok_cb, false)
+		return "Reloaded!"
 	end
 	--[[*For Debug*
 	if matches[1] == "vardumpmsg" and is_admin1(msg) then
@@ -330,4 +329,6 @@ return {
   run = run,
   pre_process = pre_process
 }
---By @kiavaprotection :)
+--By @imandaneshi :)
+--https://github.com/SEEDTEAM/TeleSeed/blob/test/plugins/admin.lua
+---Modified by @Rondoozle for supergroups
