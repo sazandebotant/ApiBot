@@ -2592,7 +2592,7 @@ local function run(msg, matches)
 				return
 			end
 			if tonumber(matches[2]) < 1 or tonumber(matches[2]) > 200 then
-				return "فقط از 1 تا 200 امکان پذیر"
+				return "Wrong number,range is [1-200]"
 			end
 			local flood_max = matches[2]
 			data[tostring(msg.to.id)]['settings']['flood_msg_max'] = flood_max
@@ -2617,11 +2617,11 @@ local function run(msg, matches)
 			if matches[2] == 'audio' then
 			local msg_type = 'Audio'
 				if not is_muted(chat_id, msg_type..': yes') then
-					savelog(msg.to.id, name_log.." ["..msg.from.id.."] لیست Mute شده ها: mute "..msg_type)
+					savelog(msg.to.id, name_log.." ["..msg.from.id.."] set SuperGroup to: mute "..msg_type)
 					mute(chat_id, msg_type)
-					return msg_type.." به لیست mute شدگان اضافه شد"
+					return msg_type.." has been muted"
 				else
-					return "سوپر گروه mute "..msg_type.." با موفقیت فعال شد"
+					return "SuperGroup mute "..msg_type.." is already on"
 				end
 			end
 			if matches[2] == 'photo' then
@@ -2629,7 +2629,7 @@ local function run(msg, matches)
 				if not is_muted(chat_id, msg_type..': yes') then
 					savelog(msg.to.id, name_log.." ["..msg.from.id.."] set SuperGroup to: mute "..msg_type)
 					mute(chat_id, msg_type)
-					return msg_type.." با موفقیت به لیست mute اضافه شد"
+					return msg_type.." has been muted"
 				else
 					return "SuperGroup mute "..msg_type.." is already on"
 				end
@@ -2639,7 +2639,7 @@ local function run(msg, matches)
 				if not is_muted(chat_id, msg_type..': yes') then
 					savelog(msg.to.id, name_log.." ["..msg.from.id.."] set SuperGroup to: mute "..msg_type)
 					mute(chat_id, msg_type)
-					return msg_type.." با موفقیت به لیست mute اضافه شد"
+					return msg_type.." has been muted"
 				else
 					return "SuperGroup mute "..msg_type.." is already on"
 				end
@@ -2649,7 +2649,7 @@ local function run(msg, matches)
 				if not is_muted(chat_id, msg_type..': yes') then
 					savelog(msg.to.id, name_log.." ["..msg.from.id.."] set SuperGroup to: mute "..msg_type)
 					mute(chat_id, msg_type)
-					return msg_type.." با موفقیت به لیست mute اضافه شد"
+					return msg_type.." have been muted"
 				else
 					return "SuperGroup mute "..msg_type.." is already on"
 				end
@@ -2659,7 +2659,7 @@ local function run(msg, matches)
 				if not is_muted(chat_id, msg_type..': yes') then
 					savelog(msg.to.id, name_log.." ["..msg.from.id.."] set SuperGroup to: mute "..msg_type)
 					mute(chat_id, msg_type)
-					return msg_type.." با موفقیت به لیست mute اضفه شد"
+					return msg_type.." have been muted"
 				else
 					return "SuperGroup mute "..msg_type.." is already on"
 				end
@@ -2669,7 +2669,7 @@ local function run(msg, matches)
 				if not is_muted(chat_id, msg_type..': yes') then
 					savelog(msg.to.id, name_log.." ["..msg.from.id.."] set SuperGroup to: mute "..msg_type)
 					mute(chat_id, msg_type)
-					return msg_type.." با موفقیت به لیست mute اضافه شد"
+					return msg_type.." has been muted"
 				else
 					return "Mute "..msg_type.." is already on"
 				end
@@ -2679,7 +2679,7 @@ local function run(msg, matches)
 				if not is_muted(chat_id, msg_type..': yes') then
 					savelog(msg.to.id, name_log.." ["..msg.from.id.."] set SuperGroup to: mute "..msg_type)
 					mute(chat_id, msg_type)
-					return "Mute "..msg_type.."  به صورت کامل mute شد"
+					return "Mute "..msg_type.."  has been enabled"
 				else
 					return "Mute "..msg_type.." is already on"
 				end
@@ -2692,9 +2692,9 @@ local function run(msg, matches)
 				if is_muted(chat_id, msg_type..': yes') then
 					savelog(msg.to.id, name_log.." ["..msg.from.id.."] set SuperGroup to: unmute "..msg_type)
 					unmute(chat_id, msg_type)
-					return msg_type.." از لیست mute حذف شد"
+					return msg_type.." has been unmuted"
 				else
-					return "Mute "..msg_type.." با موفقیت غیرفعال شد"
+					return "Mute "..msg_type.." is already off"
 				end
 			end
 			if matches[2] == 'photo' then
@@ -2702,7 +2702,7 @@ local function run(msg, matches)
 				if is_muted(chat_id, msg_type..': yes') then
 					savelog(msg.to.id, name_log.." ["..msg.from.id.."] set SuperGroup to: unmute "..msg_type)
 					unmute(chat_id, msg_type)
-					return msg_type.." از لیست Mute حذف شد"
+					return msg_type.." has been unmuted"
 				else
 					return "Mute "..msg_type.." is already off"
 				end
@@ -2712,7 +2712,7 @@ local function run(msg, matches)
 				if is_muted(chat_id, msg_type..': yes') then
 					savelog(msg.to.id, name_log.." ["..msg.from.id.."] set SuperGroup to: unmute "..msg_type)
 					unmute(chat_id, msg_type)
-					return msg_type.." از لیست mute حذف شد"
+					return msg_type.." has been unmuted"
 				else
 					return "Mute "..msg_type.." is already off"
 				end
@@ -2722,7 +2722,7 @@ local function run(msg, matches)
 				if is_muted(chat_id, msg_type..': yes') then
 					savelog(msg.to.id, name_log.." ["..msg.from.id.."] set SuperGroup to: unmute "..msg_type)
 					unmute(chat_id, msg_type)
-					return msg_type.." از لیست mute حذف شد"
+					return msg_type.." have been unmuted"
 				else
 					return "Mute "..msg_type.." is already off"
 				end
@@ -2732,7 +2732,7 @@ local function run(msg, matches)
 				if is_muted(chat_id, msg_type..': yes') then
 					savelog(msg.to.id, name_log.." ["..msg.from.id.."] set SuperGroup to: unmute "..msg_type)
 					unmute(chat_id, msg_type)
-					return msg_type.." از لیست mute حذف شد"
+					return msg_type.." have been unmuted"
 				else
 					return "Mute "..msg_type.." is already off"
 				end
@@ -2742,7 +2742,7 @@ local function run(msg, matches)
 				if is_muted(chat_id, msg_type..': yes') then
 					savelog(msg.to.id, name_log.." ["..msg.from.id.."] set SuperGroup to: unmute message")
 					unmute(chat_id, msg_type)
-					return msg_type.." از لیست mute حذف شد"
+					return msg_type.." has been unmuted"
 				else
 					return "Mute text is already off"
 				end
@@ -2752,9 +2752,9 @@ local function run(msg, matches)
 				if is_muted(chat_id, msg_type..': yes') then
 					savelog(msg.to.id, name_log.." ["..msg.from.id.."] set SuperGroup to: unmute "..msg_type)
 					unmute(chat_id, msg_type)
-					return "Mute "..msg_type.." با موفقیت تمام mute غیرفعال شد"
+					return "Mute "..msg_type.." has been disabled"
 				else
-					return "Mute "..msg_type.." قبلا غیرفعال بوده است"
+					return "Mute "..msg_type.." is already disabled"
 				end
 			end
 		end
