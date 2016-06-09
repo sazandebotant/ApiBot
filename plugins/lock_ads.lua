@@ -8,7 +8,8 @@ local function run(msg)
 local name = user_print_name(msg.from)
     local user = "user#id"..msg.from.id
 if msg.to.type == 'channel' and not is_momod(msg) then
-send_large_msg(chat, "👤کاربر :  [ @" .. msg.from.username .. "] \n💠شناسه کاربر :  [" .. msg.from.id .."] \n ❌در حال فرستادن لینک است\n 🚷پیام پاک شد" ) 
+  kick_user(msg.from.id, msg.to.id)
+send_large_msg(chat, "👤کاربر :  [ @" .. msg.from.username .. "] \n💠شناسه کاربر :  [" .. msg.from.id .."] \n 👁‍🗨دلیل : ارسال لینک در گروه\n 🚷اخراج شد  " ) 
   delete_msg(msg.id, ok_cb, true)
       end
    end
