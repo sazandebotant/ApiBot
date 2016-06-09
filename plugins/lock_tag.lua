@@ -10,8 +10,7 @@ local name = user_print_name(msg.from)
 if msg.to.type == 'channel' and not is_momod(msg) then
 
  delete_msg(msg.id, ok_cb, true)
-send_large_msg(chat, "👤کاربر : [ @" .. msg.from.username .. "] \n💠شناسه کاربر : [" .. msg.from.id .."] \n ❌در حال فرستادن اوپراتور است\n 🚷پیام پاک شد" )  
-      end
+send_large_msg(chat, "👤کاربر : [ @" .. msg.from.username .. "] \n💠شناسه کاربر : [" .. msg.from.id .."] \n ❌در حال فرستادن تگ است\n 🚷پیام پاک شد" )      end
    end
 end
     
