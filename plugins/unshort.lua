@@ -7,7 +7,7 @@ jstr, res = https.request(url)
 jdat = JSON.decode(jstr)
 if jdat.message then
     return 'Base Link :\n'..matches[2]..'\n___________\nShort Link\n'..jdat.message
-                else
+    else
                 
     return 'Base Link :\n'..matches[2]..'\n___________\nShort Link\n'..jdat.data.url
     end
@@ -15,7 +15,7 @@ if jdat.message then
     if matches[1]:lower() == 'unshorten' then
   local response_body = {}
         local request_constructor = {
-                                       url = matches[2],
+   url = matches[2],
     method = "HEAD",
     sink =
     ltn12.sink.table(response_body),
@@ -35,7 +35,7 @@ if jdat.message then
     return {
     patterns = {
     "^[/#!]([Uu]nshorten) (.*)$",
-"^[/#!]([Ss]orten) (.*)$",
+    "^[/#!]([Ss]horten) (.*)$",
 },
 run = run,
 end
