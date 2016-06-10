@@ -2815,7 +2815,7 @@ local function run(msg, matches)
 		end
 
 		if matches[1] == 'help' and not is_owner(msg) then
-			text = "برای دریافت راهنمایی ممبر ها کافیست /help_fun را بفرستید"
+			text = "🔥اطلاعات کاربری⏬\n👤یوزرنیم شما : [ @"..msg.from.username.." ] \n👤شناسه شما : [ "..msg.from.id.." ] \n👤شما یک عضو عادی هستید\n🚀برای دریافت راهنمایی دستور زیر را ارسال کنید⏬\n!help member"
 			reply_msg(msg.id, text, ok_cb, false)
 		elseif matches[1] == 'help' and is_owner(msg) then
 			local name_log = user_print_name(msg.from)
