@@ -2,13 +2,10 @@ do
 --Coded By @kiava
 local function run(msg, matches)
     local sudo
-    if matches[1] == 'ping' and is_sudo(msg) then
-        local text = [[
-
-I am online ͡° ͜ʖ ͡°
+    if matches[1] == 'ping' and is_owner(msg) then
+        local text = [[I am online ͡° ͜ʖ ͡°
 -------
-@kiavaprotection
-        ]]
+@kiavaprotection]]
 
     return text
 
