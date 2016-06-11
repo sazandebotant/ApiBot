@@ -2196,15 +2196,6 @@ local function run(msg, matches)
 			savelog(msg.to.id, name_log.." ["..msg.from.id.."] has changed group rules to ["..matches[2].."]")
 			return set_rulesmod(msg, data, target)
 		end
-		
-                     if matches[2]:lower() == 'welcome' then
-	                        local hash = 'usecommands:'..msg.from.id..':'..msg.to.id
-                                redis:incr(hash)
-                                rules = matches[3]
-                                local target = msg.to.id
-                                savelog(msg.to.id, name_log.." ["..msg.from.id.."] has changed group welcome message to ["..matches[3].."]")
-                                return set_welcomemod(msg, data, target)
-                        end
 
  if matches[1]:lower() == 'uexpiretime' and not matches[3] then
 	local hash = 'usecommands:'..msg.from.id..':'..msg.to.id
@@ -2288,6 +2279,14 @@ local function run(msg, matches)
 				channel_set_about(receiver, about_text, ok_cb, false)
 				return "موضوع گروه پاک شد"
 			end
+        if matches[2]:lower() == 'welcome' then
+	                        local hash = 'usecommands:'..msg.from.id..':'..msg.to.id
+                                redis:incr(hash)
+                                rules = matches[3]
+                                local target = msg.to.id
+                                savelog(msg.to.id, name_log.." ["..msg.from.id.."] has changed group welcome message to ["..matches[3].."]")
+                                return set_welcomemod(msg, data, target)
+                        end6
 			if matches[2] == 'silentlist' then
 				chat_id = msg.to.id
 				local hash =  'mute_user:'..chat_id
@@ -2496,22 +2495,6 @@ local function run(msg, matches)
 			end
 		end
 
-if matches[1]:lower() == 'welcome' then
-      local target = msg.to.id
-      if matches[2]:lower() == 'enable' then
-	  local hash = 'usecommands:'..msg.from.id..':'..msg.to.id
-    redis:incr(hash)
-        savelog(msg.to.id, name_log.." ["..msg.from.id.."] locked welcome ")
-        return lock_group_welcome(msg, data, target)
-      end
-	if matches[2]:lower() == 'disable' then
-	  local hash = 'usecommands:'..msg.from.id..':'..msg.to.id
-    redis:incr(hash)
-        savelog(msg.to.id, name_log.." ["..msg.from.id.."] unlocked welcome ")
-        return unlock_group_welcome(msg, data, target)
-      end
-	end
-
 		if matches[1] == 'unlock' and is_momod(msg) then
 			local target = msg.to.id
 			     if matches[2] == 'all' then
@@ -2699,6 +2682,21 @@ if matches[1]:lower() == 'welcome' then
 				return unlock_group_operator(msg, data, target)
 			end
 		end
+ if matches[1]:lower() == 'welcome' then
+      local target = msg.to.id
+      if matches[2]:lower() == 'enable' then
+	  local hash = 'usecommands:'..msg.from.id..':'..msg.to.id
+    redis:incr(hash)
+        savelog(msg.to.id, name_log.." ["..msg.from.id.."] locked welcome ")
+        return lock_group_welcome(msg, data, target)
+      end
+	if matches[2]:lower() == 'disable' then
+	  local hash = 'usecommands:'..msg.from.id..':'..msg.to.id
+    redis:incr(hash)
+        savelog(msg.to.id, name_log.." ["..msg.from.id.."] unlocked welcome ")
+        return unlock_group_welcome(msg, data, target)
+      end
+	end
 
 		if matches[1] == 'setflood' then
 			if not is_momod(msg) then
