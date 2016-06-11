@@ -208,17 +208,28 @@ pt = 'نامشخص'
 end
 -------------------
    local location
-if string.match(phone, "^+63") or string.match(phone, "^+69") then
-location = 'شماره مجازی فیلیپین'
+if string.match(phone, "^+63") or string.match(phone, "^+639") or string.match(phone, "^+635") or string.match(phone, "^+632") or string.match(phone, "^+630") or string.match(phone, "^+632") or string.match(phone, "^+637") or string.match(phone, "^+631") or string.match(phone, "^+638") then
+location = 'شماره مجازی فلیپین'
 elseif string.match(phone, "^+1") or string.match(phone, "^1") then
 location = 'شماره مجازی آمریکا'
-elseif string.match(phone, "^+98") or string.match(phone, "^+989") then
-location = 'ایران'
-elseif string.match(phone, "^+62") or string.match(phone, "^+62") then
+elseif string.match(phone, "^+62") or string.match(phone, "^+622") or string.match(phone, "^+631") or string.match(phone, "^+627") or string.match(phone, "^+626") or string.match(phone, "^+622") or string.match(phone, "^+98938") or string.match(phone, "^62") then
 location = 'شماره مجازی اندونزی'
+elseif string.match(phone, "^+989") or string.match(phone, "^+9890") then
+location = 'ایران'
+elseif string.match(phone, "^+98911") then
+location = 'ایران'
+elseif string.match(phone, "^+98921") then
+location = 'ایران'
+elseif string.match(phone, "^+98931") or string.match(phone, "^+989324") then
+location = 'ایران'
+elseif string.match(phone, "^+989329") then
+location = 'ایران'
+elseif string.match(phone, "^+98934") then
+location = 'ایران'
 else
-location = 'ناشناخته'
+location = 'نامشخص'
 end
+
 --------------------
    local text = 'First Name : '..(msg.from.first_name or '----')..'\n'
    local text = text..'Last Name : '..(msg.from.last_name or '----')..'\n'	
