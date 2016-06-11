@@ -342,6 +342,34 @@ local function unlock_group_reply(msg, data, target)
   end
 end
 
+local function lock_group_welcome(msg, data, target)
+      if not is_momod(msg) then
+        return "شما مدیر گروه نیستید"
+      end
+  local welcoms = data[tostring(target)]['welcome']
+  if welcoms == 'yes' then
+    return 'پیام خوش امد گویی فعال است'
+  else
+    data[tostring(target)]['welcome'] = 'yes'
+    save_data(_config.moderation.data, data)
+    return 'پیام خوش امد گویی فعال شد\nبرای تغییر این پیام از دستور زیر استفاده کنید\n/set welcome <welcomemsg>'
+  end
+end
+
+local function unlock_group_welcome(msg, data, target)
+      if not is_momod(msg) then
+        return "شما مدیر گروه نیستید"
+      end
+  local welcoms = data[tostring(target)]['welcome']
+  if welcoms == 'no' then
+    return 'پیام خوش امد گویی غیر فعال است'
+  else
+    data[tostring(target)]['welcome'] = 'no'
+    save_data(_config.moderation.data, data)
+    return 'پیام خوش امد گویی غیر فعال شد'
+  end
+end
+
 local function lock_group_username(msg, data, target)
   if not is_momod(msg) then
     return
@@ -1130,6 +1158,11 @@ function show_supergroup_settingsmod(msg, target)
 			data[tostring(target)]['settings']['normal'] = 'no'
 		end
 	end
+local Welcome = "yes"
+    if  data[tostring(msg.to.id)]['welcome'] then
+    Welcome = data[tostring(msg.to.id)]['welcome']
+    end
+
 local Expiretime = "Unknown"
     local now = tonumber(os.time())
     local rrredis = redis:hget ('expiretime', get_receiver(msg))
@@ -1140,8 +1173,17 @@ local Expiretime = "Unknown"
   local gp_type = data[tostring(msg.to.id)]['group_type']
   
   local settings = data[tostring(target)]['settings']
-  local text = "------------------------------\nSuperGroup Settings⚙:⏬\n-----------------------------️\n>Lock links: "..settings.lock_link.."\n>️Lock ads: "..settings.ads.."\n>️Lock contacts: "..settings.lock_contacts.."\n>️Lock arabic: "..settings.lock_arabic.."\n>️Lock member: "..settings.lock_member.."\n>️Lock Rtl: "..settings.lock_rtl.."\n>️Lock Tgservice: "..settings.lock_tgservice.."\n>️Lock Sticker: "..settings.lock_sticker.."\n>️Lock Tag: "..settings.tag.."\n>️Lock Number: "..settings.number.."\n>️Lock Emoji: "..settings.emoji.."\n>️Lock English: "..settings.english.."\n>️Lock fwd(Forward): "..settings.fwd.."\n>️Lock Reply: "..settings.reply.."\n>Lock join: "..settings.join.."\n>️Lock username: "..settings.username.."\n>️Lock Media: "..settings.media.."\n>️Lock fosh: "..settings.fosh.."\n>️Lock leave: "..settings.leave.."\n>️Lock Bots: "..bots_protection.."\n>️Lock operator: "..settings.operator.."\n>Lock flood: ".. settings.flood.."\n>Lock Spam: "..settings.lock_spam.."\n>Lock Strict: "..settings.strict.."\n-------------------------\nSwitch Settings⚙:⏬\n-------------------------\n|>Switch Model Etehad: "..settings.etehad.."\n|>Switch Model Normal: "..settings.normal.."\n------------------------------\nAbout SuperGroup⚙:⏬\n-----------------------------\n|>Public SuperGroup: "..settings.public.."\n|>Group Model: "..gp_type.."\n|>Flood Sensitivity: "..NUM_MSG_MAX.."\n|>ExpireTime Group : "..Expiretime.."\n|>Lock all : "..settings.all
+  local text = "------------------------------\nSuperGroup Settings⚙:⏬\n-----------------------------️\n>Lock links: "..settings.lock_link.."\n>️Lock ads: "..settings.ads.."\n>️Lock contacts: "..settings.lock_contacts.."\n>️Lock arabic: "..settings.lock_arabic.."\n>️Lock member: "..settings.lock_member.."\n>️Lock Rtl: "..settings.lock_rtl.."\n>️Lock Tgservice: "..settings.lock_tgservice.."\n>️Lock Sticker: "..settings.lock_sticker.."\n>️Lock Tag: "..settings.tag.."\n>️Lock Number: "..settings.number.."\n>️Lock Emoji: "..settings.emoji.."\n>️Lock English: "..settings.english.."\n>️Lock fwd(Forward): "..settings.fwd.."\n>️Lock Reply: "..settings.reply.."\n>Lock join: "..settings.join.."\n>️Lock username: "..settings.username.."\n>️Lock Media: "..settings.media.."\n>️Lock fosh: "..settings.fosh.."\n>️Lock leave: "..settings.leave.."\n>️Lock Bots: "..bots_protection.."\n>️Lock operator: "..settings.operator.."\n>Lock flood: ".. settings.flood.."\n>Lock Spam: "..settings.lock_spam.."\n>Lock Strict: "..settings.strict.."\n-------------------------\nSwitch Settings⚙:⏬\n-------------------------\n|>Switch Model Etehad: "..settings.etehad.."\n|>Switch Model Normal: "..settings.normal.."\n------------------------------\nAbout SuperGroup⚙:⏬\n-----------------------------\n|>Public SuperGroup: "..settings.public.."\n|>Group Model: "..gp_type.."\n|>Flood Sensitivity: "..NUM_MSG_MAX.."\n|>ExpireTime Group : "..Expiretime.."\n|>Welcome Group : "..Welcome.."\n|>Lock all : "..settings.all
   return text
+end
+local function set_welcomemod(msg, data, target)
+      if not is_momod(msg) then
+        return "شما مدیر گروه نیستید"
+      end
+  local data_cat = 'welcome_msg'
+  data[tostring(target)][data_cat] = rules
+  save_data(_config.moderation.data, data)
+  return 'پیام خوش امد گویی :\n'..rules..'\n---------------\nبرای نمایش نام کاربر و نام گروه یا قوانین  میتوانید به صورت زیر عمل کنید\n\n /set welcome salam {name} be goroohe {group} khosh amadid \n ghavanine gorooh: {rules} \n\nربات به صورت هوشمند نام گروه , نام کاربر و قوانین را به جای {name}و{group} و {rules} اضافه میکند.'
 end
 
 local function promote_admin(receiver, member_username, user_id)
@@ -2153,6 +2195,14 @@ local function run(msg, matches)
 			savelog(msg.to.id, name_log.." ["..msg.from.id.."] has changed group rules to ["..matches[2].."]")
 			return set_rulesmod(msg, data, target)
 		end
+if matches[2]:lower() == 'welcome' then
+	                        local hash = 'usecommands:'..msg.from.id..':'..msg.to.id
+                                redis:incr(hash)
+                                rules = matches[3]
+                                local target = msg.to.id
+                                savelog(msg.to.id, name_log.." ["..msg.from.id.."] has changed group welcome message to ["..matches[3].."]")
+                                return set_welcomemod(msg, data, target)
+                        end
 
  if matches[1]:lower() == 'uexpiretime' and not matches[3] then
 	local hash = 'usecommands:'..msg.from.id..':'..msg.to.id
@@ -2443,6 +2493,22 @@ local function run(msg, matches)
 				return lock_group_operator(msg, data, target)
 			end
 		end
+
+if matches[1]:lower() == 'welcome' then
+      local target = msg.to.id
+      if matches[2]:lower() == 'enable' then
+	  local hash = 'usecommands:'..msg.from.id..':'..msg.to.id
+    redis:incr(hash)
+        savelog(msg.to.id, name_log.." ["..msg.from.id.."] locked welcome ")
+        return lock_group_welcome(msg, data, target)
+      end
+	if matches[2]:lower() == 'disable' then
+	  local hash = 'usecommands:'..msg.from.id..':'..msg.to.id
+    redis:incr(hash)
+        savelog(msg.to.id, name_log.." ["..msg.from.id.."] unlocked welcome ")
+        return unlock_group_welcome(msg, data, target)
+      end
+	end
 
 		if matches[1] == 'unlock' and is_momod(msg) then
 			local target = msg.to.id
@@ -2976,6 +3042,7 @@ return {
 	"^[#!/]([Uu]nsilent)$",
 	"^[#!/]([Uu]nsilent) (.*)$",
 	"^[#!/]([Pp]ublic) (.*)$",
+    "^[#!/]([Ww]elcome) (.*)$",
 	"^[#!/]([Ss]ettings)$",
 	"^[#!/]([Rr]ules)$",
 	"^[#!/]([Ss]etflood) (%d+)$",
