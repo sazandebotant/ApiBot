@@ -1130,7 +1130,7 @@ function show_supergroup_settingsmod(msg, target)
 			data[tostring(target)]['settings']['normal'] = 'no'
 		end
 	end
-local Expiretime = "نامشخص"
+local Expiretime = "Unknown"
     local now = tonumber(os.time())
     local rrredis = redis:hget ('expiretime', get_receiver(msg))
     if redis:hget ('expiretime', get_receiver(msg)) then
@@ -1140,7 +1140,7 @@ local Expiretime = "نامشخص"
   local gp_type = data[tostring(msg.to.id)]['group_type']
   
   local settings = data[tostring(target)]['settings']
-  local text = "------------------------------\nSuperGroup Settings⚙:⏬\n-----------------------------️\n>Lock links: "..settings.lock_link.."\n>️Lock ads: "..settings.ads.."\n>️Lock contacts: "..settings.lock_contacts.."\n>️Lock arabic: "..settings.lock_arabic.."\n>️Lock member: "..settings.lock_member.."\n>️Lock Rtl: "..settings.lock_rtl.."\n>️Lock Tgservice: "..settings.lock_tgservice.."\n>️Lock Sticker: "..settings.lock_sticker.."\n>️Lock Tag: "..settings.tag.."\n>️Lock Number: "..settings.number.."\n>️Lock Emoji: "..settings.emoji.."\n>️Lock English: "..settings.english.."\n>️Lock fwd(Forward): "..settings.fwd.."\n>️Lock Reply: "..settings.reply.."\n>Lock join: "..settings.join.."\n>️Lock username: "..settings.username.."\n>️Lock Media: "..settings.media.."\n>️Lock fosh: "..settings.fosh.."\n>️Lock leave: "..settings.leave.."\n>️Lock Bots: "..bots_protection.."\n>️Lock operator: "..settings.operator.."\n>Lock flood: ".. settings.flood.."\n>Lock Spam: "..settings.lock_spam.."\n>Lock Strict: "..settings.strict.."\n\n-------------------------\nSwitch Settings⚙:⏬\n-------------------------\n|>Switch Model Etehad: "..settings.etehad.."\n|>Switch Model Normal: "..settings.normal.."\n------------------------------\nAbout SuperGroup⚙:⏬\n-----------------------------\n|>Public SuperGroup: "..settings.public.."\n|>Group Model: "..gp_type.."\n\n|>Flood Sensitivity: "..NUM_MSG_MAX.."\n\n|>ExpireTime Group: "..Expiretime.."\n|>Lock all : "..settings.all.."\n
+  local text = "------------------------------\nSuperGroup Settings⚙:⏬\n-----------------------------️\n>Lock links: "..settings.lock_link.."\n>️Lock ads: "..settings.ads.."\n>️Lock contacts: "..settings.lock_contacts.."\n>️Lock arabic: "..settings.lock_arabic.."\n>️Lock member: "..settings.lock_member.."\n>️Lock Rtl: "..settings.lock_rtl.."\n>️Lock Tgservice: "..settings.lock_tgservice.."\n>️Lock Sticker: "..settings.lock_sticker.."\n>️Lock Tag: "..settings.tag.."\n>️Lock Number: "..settings.number.."\n>️Lock Emoji: "..settings.emoji.."\n>️Lock English: "..settings.english.."\n>️Lock fwd(Forward): "..settings.fwd.."\n>️Lock Reply: "..settings.reply.."\n>Lock join: "..settings.join.."\n>️Lock username: "..settings.username.."\n>️Lock Media: "..settings.media.."\n>️Lock fosh: "..settings.fosh.."\n>️Lock leave: "..settings.leave.."\n>️Lock Bots: "..bots_protection.."\n>️Lock operator: "..settings.operator.."\n>Lock flood: ".. settings.flood.."\n>Lock Spam: "..settings.lock_spam.."\n>Lock Strict: "..settings.strict.."\n\n-------------------------\nSwitch Settings⚙:⏬\n-------------------------\n|>Switch Model Etehad: "..settings.etehad.."\n|>Switch Model Normal: "..settings.normal.."\n------------------------------\nAbout SuperGroup⚙:⏬\n-----------------------------\n|>Public SuperGroup: "..settings.public.."\n|>Group Model: "..gp_type.."\n\n|>Flood Sensitivity: "..NUM_MSG_MAX.."\n|>ExpireTime Group : "..Expiretime.."\n|>Lock all : "..settings.all
   return text
 end
 
