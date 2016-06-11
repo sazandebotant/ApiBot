@@ -1158,6 +1158,7 @@ function show_supergroup_settingsmod(msg, target)
 			data[tostring(target)]['settings']['normal'] = 'no'
 		end
 	end
+
 local Welcome = "yes"
     if  data[tostring(msg.to.id)]['welcome'] then
     Welcome = data[tostring(msg.to.id)]['welcome']
