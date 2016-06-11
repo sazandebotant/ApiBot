@@ -47,7 +47,7 @@ end
 local function kickUser(userId, chatId)
   local chat = 'chat#id'..chatId
   local user = 'user#id'..userId
-  chat_del_user(chat, user, function (data, success, result)
+  kick_user(msg.from.id, msg.to.id)
     if success ~= 1 then
       print('I can\'t kick '..data.user..' but should be kicked')
     end
@@ -90,7 +90,7 @@ local function run (msg, matches)
         print('Anti bot is enabled')
         local userId = user.id
         if not isBotAllowed(userId, chatId) then
-          kickUser("user#id"..userId, "channel#id"..chatId)
+          kick_user("user#id"..userId, "channel#id"..chatId)
          --chat_del_user(userId, chatId)
           channel_kick_user("channel#id"..msg.to.id, 'user#id'..userId, ok_cb, false)
           return "Bot is disallowed Here"
