@@ -2286,7 +2286,7 @@ local function run(msg, matches)
                                 local target = msg.to.id
                                 savelog(msg.to.id, name_log.." ["..msg.from.id.."] has changed group welcome message to ["..matches[3].."]")
                                 return set_welcomemod(msg, data, target)
-                        end6
+                        end
 			if matches[2] == 'silentlist' then
 				chat_id = msg.to.id
 				local hash =  'mute_user:'..chat_id
