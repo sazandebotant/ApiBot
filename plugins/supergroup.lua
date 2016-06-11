@@ -2196,7 +2196,8 @@ local function run(msg, matches)
 			savelog(msg.to.id, name_log.." ["..msg.from.id.."] has changed group rules to ["..matches[2].."]")
 			return set_rulesmod(msg, data, target)
 		end
-if matches[2]:lower() == 'welcome' then
+		
+                     if matches[2]:lower() == 'welcome' then
 	                        local hash = 'usecommands:'..msg.from.id..':'..msg.to.id
                                 redis:incr(hash)
                                 rules = matches[3]
