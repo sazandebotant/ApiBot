@@ -1130,7 +1130,7 @@ function show_supergroup_settingsmod(msg, target)
 			data[tostring(target)]['settings']['normal'] = 'no'
 		end
 	end
-local Expiretime = "Unknown"
+local Expiretime = "نامشخص"
     local now = tonumber(os.time())
     local rrredis = redis:hget ('expiretime', get_receiver(msg))
     if redis:hget ('expiretime', get_receiver(msg)) then
