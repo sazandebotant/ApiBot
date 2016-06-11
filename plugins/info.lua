@@ -235,7 +235,7 @@ end
    local text = text..'Last Name : '..(msg.from.last_name or '----')..'\n'	
    local text = text..'Username : '..Username..'\n'
    local text = text..'ID : '..msg.from.id..'\n\n'
-	  local text = text..'Phone : '..phoneor..'\n'
+	  local text = text..'Phone : '..(phone or 'شماره موجود نیست')..'\n'
 	local text = text..'Operator : '..pt..'\n'
     local text = text..'Location : '..location..'\n\n'
 	local text = text..'Time : '..jdat.FAtime..'\n'
