@@ -237,7 +237,7 @@ end
    local text = text..'ID : '..msg.from.id..'\n\n'
 	  local text = text..'Phone : '..(phone or 'شماره شما موجود نیست')..'\n'
 	local text = text..'Operator : '..pt..'\n'
-    local text = text..'Location : '..location..'\n\n
+    local text = text..'Location : '..location..'\n\n'
 	local text = text..'Time : '..jdat.FAtime..'\n'
 	local text = text..'Date  : '..jdat.FAdate..'\n\n'
    local hash = 'rank:'..msg.to.id..':variables'
