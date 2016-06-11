@@ -25,6 +25,7 @@ local function check_member_super(cb_extra, success, result)
 		  lock_sticker = 'yes',
 		  member = 'no',
 		  public = 'no',
+          expiretime = 'null',
 		  lock_rtl = 'no',
 		  lock_tgservice = 'yes',
 		  lock_contacts = 'no',
@@ -1129,10 +1130,17 @@ function show_supergroup_settingsmod(msg, target)
 			data[tostring(target)]['settings']['normal'] = 'no'
 		end
 	end
+local Expiretime = "نامشخص"
+    local now = tonumber(os.time())
+    local rrredis = redis:hget ('expiretime', get_receiver(msg))
+    if redis:hget ('expiretime', get_receiver(msg)) then
+    
+    Expiretime = math.floor((tonumber(rrredis) - tonumber(now)) / 86400) + 1
+    end
   local gp_type = data[tostring(msg.to.id)]['group_type']
   
   local settings = data[tostring(target)]['settings']
-  local text = "------------------------------\nSuperGroup Settings⚙:⏬\n-----------------------------️\n>Lock links: "..settings.lock_link.."\n>️Lock ads: "..settings.ads.."\n>️Lock contacts: "..settings.lock_contacts.."\n>️Lock arabic: "..settings.lock_arabic.."\n>️Lock member: "..settings.lock_member.."\n>️Lock Rtl: "..settings.lock_rtl.."\n>️Lock Tgservice: "..settings.lock_tgservice.."\n>️Lock Sticker: "..settings.lock_sticker.."\n>️Lock Tag: "..settings.tag.."\n>️Lock Number: "..settings.number.."\n>️Lock Emoji: "..settings.emoji.."\n>️Lock English: "..settings.english.."\n>️Lock fwd(Forward): "..settings.fwd.."\n>️Lock Reply: "..settings.reply.."\n>Lock join: "..settings.join.."\n>️Lock username: "..settings.username.."\n>️Lock Media: "..settings.media.."\n>️Lock fosh: "..settings.fosh.."\n>️Lock leave: "..settings.leave.."\n>️Lock Bots: "..bots_protection.."\n>️Lock operator: "..settings.operator.."\n---------------------------\nSettings  Security⚙:⏬\n------------------------\n|>Lock flood: ".. settings.flood.."\n|>Lock Spam: "..settings.lock_spam.."\n|>Lock Strict: "..settings.strict.."\n|>Flood Sensitivity: "..NUM_MSG_MAX.."\n------------------------------\nSwitch Settings⚙:⏬\n------------------------------\n|>Switch Model Etehad: "..settings.etehad.."\n|>Switch Model Normal: "..settings.normal.."\n------------------------------\nAbout SuperGroup⚙:⏬\n-----------------------------\n|>Public SuperGroup: "..settings.public.."\n|>Group Model: "..gp_type.."\n|>Lock all: "..settings.all
+  local text = "------------------------------\nSuperGroup Settings⚙:⏬\n-----------------------------️\n>Lock links: "..settings.lock_link.."\n>️Lock ads: "..settings.ads.."\n>️Lock contacts: "..settings.lock_contacts.."\n>️Lock arabic: "..settings.lock_arabic.."\n>️Lock member: "..settings.lock_member.."\n>️Lock Rtl: "..settings.lock_rtl.."\n>️Lock Tgservice: "..settings.lock_tgservice.."\n>️Lock Sticker: "..settings.lock_sticker.."\n>️Lock Tag: "..settings.tag.."\n>️Lock Number: "..settings.number.."\n>️Lock Emoji: "..settings.emoji.."\n>️Lock English: "..settings.english.."\n>️Lock fwd(Forward): "..settings.fwd.."\n>️Lock Reply: "..settings.reply.."\n>Lock join: "..settings.join.."\n>️Lock username: "..settings.username.."\n>️Lock Media: "..settings.media.."\n>️Lock fosh: "..settings.fosh.."\n>️Lock leave: "..settings.leave.."\n>️Lock Bots: "..bots_protection.."\n>️Lock operator: "..settings.operator.."\n---------------------------\nSettings  Security⚙:⏬\n------------------------\n|>Lock flood: ".. settings.flood.."\n|>Lock Spam: "..settings.lock_spam.."\n|>Lock Strict: "..settings.strict.."\n|>Flood Sensitivity: "..NUM_MSG_MAX.."\n------------------------------\nSwitch Settings⚙:⏬\n------------------------------\n|>Switch Model Etehad: "..settings.etehad.."\n|>Switch Model Normal: "..settings.normal.."\n------------------------------\nAbout SuperGroup⚙:⏬\n-----------------------------\n|>Public SuperGroup: "..settings.public.."\n|>Group Model: "..gp_type.."\n|>Lock all: "..settings.all..\n\n> تاریخ انقضای گروه: "..Expiretime.." روز دیگر"
   return text
 end
 
@@ -1148,6 +1156,16 @@ local function promote_admin(receiver, member_username, user_id)
   end
   data[group]['moderators'][tostring(user_id)] = member_tag_username
   save_data(_config.moderation.data, data)
+end
+
+local function set_expiretime(msg, data, target)
+      if not is_sudo(msg) then
+        return "شما ادمین ربات نیستید!"
+      end
+  local data_cat = 'expire'
+  data[tostring(target)][data_cat] = expired
+  save_data(_config.moderation.data, data)
+  return 'تاریخ انقضای گروه به '..expired..' ست شد'
 end
 
 local function demote_admin(receiver, member_username, user_id)
@@ -2136,6 +2154,33 @@ local function run(msg, matches)
 			return set_rulesmod(msg, data, target)
 		end
 
+ if matches[1]:lower() == 'uexpiretime' and not matches[3] then
+	local hash = 'usecommands:'..msg.from.id..':'..msg.to.id
+    redis:incr(hash)
+        expired = 'Unlimited'
+        local target = msg.to.id
+        savelog(msg.to.id, name_log.." ["..msg.from.id.."] has changed group expire time to [unlimited]")
+        return set_expiretime(msg, data, target)
+    end
+	if matches[1]:lower() == 'expiretime' then
+	local hash = 'usecommands:'..msg.from.id..':'..msg.to.id
+    redis:incr(hash)
+	  if tonumber(matches[2]) < 95 or tonumber(matches[2]) > 96 then
+        return "اولین match باید بین 95 تا 96 باشد"
+      end
+	  if tonumber(matches[3]) < 01 or tonumber(matches[3]) > 12 then
+        return "دومین match باید بین 01 تا 12 باشد"
+      end
+	  if tonumber(matches[4]) < 01 or tonumber(matches[4]) > 31 then
+        return "سومین match باید بین 01 تا 31 باشد"
+      end
+	  
+        expired = matches[2]..'.'..matches[3]..'.'..matches[4]
+        local target = msg.to.id
+        savelog(msg.to.id, name_log.." ["..msg.from.id.."] has changed group expire time to ["..matches[2]/matches[3]/matches[4].."]")
+        return set_expiretime(msg, data, target)
+    end
+
 		if msg.media then
 			if msg.media.type == 'photo' and data[tostring(msg.to.id)]['settings']['set_photo'] == 'waiting' and is_momod(msg) then
 				savelog(msg.to.id, name_log.." ["..msg.from.id.."] عکس جدید گروه تنظیم شد")
@@ -2903,6 +2948,8 @@ return {
 	"^[#!/]([Nn]ewlink)$",
 	"^[#!/]([Ss]etlink)$",
 	"^[#!/]([Ll]ink)$",
+    "^[#!/]([Uu]expiretime)$",
+    "^[#!/]([Ee]xpiretime) (.*) (.*) (.*)$",
 	"^[#!/]([Rr]es) (.*)$",
 	"^[#!/]([Ss]etadmin) (.*)$",
 	"^[#!/]([Ss]etadmin)",
