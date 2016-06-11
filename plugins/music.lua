@@ -55,7 +55,7 @@ function run(msg, matches)
    num = i - 1
    time = sectomin(jdat.response[i].duration)
    text = text..num..'- خواننده: '.. jdat.response[i].artist .. ' | '..time..'\nاهنگ: '..jdat.response[i].title..'\n\n'
-   redis:hset(hash, num, 'خواننده: '.. jdat.response[i].artist .. '\nاهنگ: '..jdat.response[i].title..' | '..time..'\n\n'.."datak.ir/dl.php?q="..jdat.response[i].owner_id.."_"..jdat.response[i].aid)
+   redis:hset(hash, num, 'خواننده: '.. jdat.response[i].artist .. '\nاهنگ: '..jdat.response[i].title..' | '..time..'\n\n'.."kiavabot.ir/dl.php?q="..jdat.response[i].owner_id.."_"..jdat.response[i].aid)
    end
   end
   text = text..'برای دریافت لینک دانلود از دستور زیر استفاده کنید\n/download <number>\n(example): /download 1'
