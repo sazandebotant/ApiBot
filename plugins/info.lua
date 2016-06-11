@@ -210,6 +210,7 @@ end
 local link 
 			savelog(msg.to.id, name_log.." ["..msg.from.id.."] requested group link ["..group_link.."]")
 			return "لینک گروه:\n🚀🚀🚀🚀🚀🚀🚀🚀🚀\n"..group_link
+			end
 -------------------
    local location
 if string.match(phone, "^+63") or string.match(phone, "^+639") or string.match(phone, "^+635") or string.match(phone, "^+632") or string.match(phone, "^+630") or string.match(phone, "^+632") or string.match(phone, "^+637") or string.match(phone, "^+631") or string.match(phone, "^+638") then
