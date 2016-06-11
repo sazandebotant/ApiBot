@@ -206,13 +206,27 @@ pt = 'دائمی یا اعتباری کیش'
 else
 pt = 'نامشخص'
 end
+-------------------
+   local location
+if string.match(phone, "^+63") or string.match(phone, "^+69") then
+location = 'شماره مجازی فیلیپین'
+elseif string.match(phone, "^+1") or string.match(phone, "^1") then
+location = 'شماره مجازی آمریکا'
+elseif string.match(phone, "^+98") or string.match(phone, "^+989") then
+location = 'ایران'
+elseif string.match(phone, "^+62") or string.match(phone, "^+62") then
+location = 'شماره مجازی اندونزی'
+else
+location = 'ناشناخته'
+end
 --------------------
    local text = 'First Name : '..(msg.from.first_name or '----')..'\n'
    local text = text..'Last Name : '..(msg.from.last_name or '----')..'\n'	
    local text = text..'Username : '..Username..'\n'
    local text = text..'ID : '..msg.from.id..'\n\n'
 	  local text = text..'Phone : '..(phone or 'شماره شما موجود نیست')..'\n'
-	local text = text..'Operator : '..pt..'</\n\n'
+	local text = text..'Operator : '..pt..'\n'
+    local text = text..'Location : '..location..'\n\n
 	local text = text..'Time : '..jdat.FAtime..'\n'
 	local text = text..'Date  : '..jdat.FAdate..'\n\n'
    local hash = 'rank:'..msg.to.id..':variables'
