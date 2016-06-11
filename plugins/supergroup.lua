@@ -857,7 +857,7 @@ local function unlock_group_sticker(msg, data, target)
   if group_sticker_lock == 'no' then
     return 'Sticker posting is already unlocked'
   else
-    data[tostring(target)]['settings']['lock_sticker'] = 'yes'
+    data[tostring(target)]['settings']['lock_sticker'] = 'no'
     save_data(_config.moderation.data, data)
     return 'Sticker posting has been unlocked'
   end
